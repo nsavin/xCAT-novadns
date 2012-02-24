@@ -1,6 +1,6 @@
 Summary:    Nova-DNS plugin for xCAT 
 Name:	    xCAT-novadns
-Version:    %(cat Version)
+Version:    0.0.1 
 Release:    1 
 Group:	    Applications/System
 Source0:    %{name}-%{version}.tar.gz
