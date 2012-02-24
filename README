@@ -1,0 +1,40 @@
+Overview
+===========================
+xCAT-novadns is plugin to allow `makedns` command work with Nova DNS API.
+
+For more information on xCAT see: http://xcat.sf.net
+For more information on Nova DNS API see: http://www.griddynamics.com/openstack/docs/nova-dns/
+
+Configuration
+===========================
+switch to novadns plugin: 
+  chtab key=dnshandler site.value=novadns
+setup passwd and api endpoint for Nova DNS API in form token@http://enpoint_url. 
+For example: 
+  export PASSWORD="999888777666@http://localhost:15353" 
+  chtab key=novadns_url passwd.password="$PASSWORD" passwd.username="xcat_key"
+Setup global zone:
+  chtab key=domain site.value=cloud
+Setup per-network zone:
+  export NETWORK="192_168_56_0-255_255_255_0" 
+  chtab netname="$NETWORK" networks.ddnsdomain="test.cloud"
+
+RPM Building
+===========================
+Clone git repository, rename the top dir to xCAT-novadns-VERSION,
+and tar it to xCAT-novadns-VERSION.tar.gz. Place it to rpmbuild/SOURCES
+directory and run::
+
+    $ rpmbuild -ba xCAT-novadns.spec
+
+Usage
+===========================
+help message:
+  makedns --help 
+drop zones and re-create from scratch: 
+  makedns -n your_nodes
+update existend records and add new:
+  makedns your_nodes
+delete records:
+  makedns -d your_nodes
+
